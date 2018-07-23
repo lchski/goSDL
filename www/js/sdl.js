@@ -370,6 +370,7 @@ function populateInformationGathering(form_metadata){
       for ( var option of v.options){
         field = field + '<option value='+ option.value +'>'+ option.text +'</option>'
       }
+      field = field + '</select>';
     }
 
     a.find(".input-group").first().html(field);
