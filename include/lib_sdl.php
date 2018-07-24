@@ -1,5 +1,5 @@
 <?php
-//	include("lib_jira.php");
+//	include("lib_jira.php"); // TODO: fix or don't, we don't use Jira
 	$dotenv = new Dotenv\Dotenv(__DIR__);
 	$dotenv->load();
     error_reporting(0);
