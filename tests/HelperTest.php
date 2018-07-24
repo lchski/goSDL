@@ -13,8 +13,8 @@ final class HelperTest extends TestCase
 
     public function testParentModuleAddedIfOnlySubmodulePresent(): void {
         $this->assertEquals(
-            sort(_sdl_add_parent_modules($this->list_with_just_submodule)),
-            sort($this->list_with_both_modules)
+            sort($this->list_with_both_modules),
+            sort(_sdl_add_missing_parent_modules($this->list_with_just_submodule))
         );
     }
 
@@ -23,8 +23,20 @@ final class HelperTest extends TestCase
         $this->assertFalse(_sdl_path_references_submodule("../www/sdl/modules/languages.json"));
     }
 
-    public function testIsModuleListMissingParentModule(): void {
-        $this->assertTrue(_sdl_is_module_list_missing_parent_module($this->list_with_just_submodule));
-        $this->assertFalse(_sdl_is_module_list_missing_parent_module($this->list_with_both_modules));
+    public function testModuleListContainsModule(): void {
+        $this->assertFalse(_sdl_module_list_contains_module($this->list_with_just_submodule, "../www/sdl/modules/languages.json"));
+        $this->assertTrue(_sdl_module_list_contains_module($this->list_with_both_modules, "../www/sdl/modules/languages.json"));
+    }
+
+    public function testGetSubmoduleParentModulePath(): void {
+        $this->assertEquals(
+            "../www/sdl/modules/languages.json",
+            _sdl_get_submodule_parent_module_path("../www/sdl/modules/languages.json13add3ace4d7ac08f0190cb68b6f71d6")
+        );
+
+        $this->assertEquals(
+            "../www/sdl/modules/languages.json",
+            _sdl_get_submodule_parent_module_path("../www/sdl/modules/languages.json")
+        );
     }
 }

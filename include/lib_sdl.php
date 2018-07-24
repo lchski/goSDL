@@ -500,20 +500,33 @@
     /**
      * For a list of modules and submodules, add the parent module for any submodules lacking them.
      *
-     * @param $modules
+     * @param string[] $modules
      */
-	function _sdl_add_parent_modules($modules){
+	function _sdl_add_missing_parent_modules($modules){
         foreach($modules as $module) {
-            if (_sdl_path_references_submodule($module) && _sdl_is_module_list_missing_parent_module($modules, _sdl_get_submodule_parent_module_path($module))) {
+            if (_sdl_path_references_submodule($module) && ! _sdl_module_list_contains_module($modules, _sdl_get_submodule_parent_module_path($module))) {
                 $modules[] = _sdl_get_submodule_parent_module_path($module);
             }
-        }
+		}
+
+		return $modules;
     }
 
-    function _sdl_is_module_list_missing_parent_module($modules, $parent_module) {
-        
+	/**
+	 * Check if a module is present within a list of modules.
+	 *
+	 * @param string[] $modules
+	 * @param string $parent_module
+	 */
+    function _sdl_module_list_contains_module($modules, $parent_module) {
+		return in_array($parent_module, $modules);
     }
 
+	/**
+	 * Check whether or not a path is for a submodule.
+	 *
+	 * @param string $path
+	 */
     function _sdl_path_references_submodule($path) {
 	    $path_components = explode('.json', $path);
 
@@ -526,8 +539,15 @@
         }
     }
 
+	/**
+	 * Get the parent path for a submodule’s path.
+	 *
+	 * @param string $submodule_path
+	 */
     function _sdl_get_submodule_parent_module_path($submodule_path) {
+		$path_components = explode('.json', $submodule_path);
 
+		return $path_components[0] . '.json';
     }
 
 	/**
