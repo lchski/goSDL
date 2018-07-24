@@ -1,5 +1,5 @@
 <?php
-	include("lib_jira.php");
+//	include("lib_jira.php");
 	$dotenv = new Dotenv\Dotenv(__DIR__);
 	$dotenv->load();
     error_reporting(0);
@@ -496,6 +496,15 @@
 
 	}
 
+
+    /**
+     * For a list of modules and submodules, add the parent module for any submodules lacking them.
+     *
+     * @param $modules
+     */
+	function _sdl_add_parent_modules($modules){
+
+    }
 
 	/**
 	 * Generate Trello board
