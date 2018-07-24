@@ -207,6 +207,7 @@
       </script>
 
   {/if}
+  <script src="js/lib/md5.min.js?{$versions}"></script>
   <script src="js/sdl.js?{$versions}"></script>
 </body>
 </html>

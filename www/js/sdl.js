@@ -149,7 +149,7 @@ function gen_CheckboxGroup(metadata){
     $.each(metadata.submodules, function(i,k){
       var b = jqHTMLobj(template_CourseModuleCheckbox);
       $(b).addClass("indentedCheckbox");
-      b.find(".courseCheckSelection").attr('value', k.filename);
+      b.find(".courseCheckSelection").attr('value', k.filename + md5(k.filename + k.title));
       b.find(".courseCheckSelection").attr('tags', k.tags);
       b.find(".checkDescription").text(k.title);
       b.find(".checkDetails").text(k.description);
