@@ -4,6 +4,7 @@
 	#
 
 	$dir = dirname(__FILE__);
+	require_once("$dir/../vendor/autoload.php");
 	include("$dir/../include/lib_sdl.php");
 	header("Content-type: application/json");
 
