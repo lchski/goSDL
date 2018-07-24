@@ -503,6 +503,30 @@
      * @param $modules
      */
 	function _sdl_add_parent_modules($modules){
+        foreach($modules as $module) {
+            if (_sdl_path_references_submodule($module) && _sdl_is_module_list_missing_parent_module($modules, _sdl_get_submodule_parent_module_path($module))) {
+                $modules[] = _sdl_get_submodule_parent_module_path($module);
+            }
+        }
+    }
+
+    function _sdl_is_module_list_missing_parent_module($modules, $parent_module) {
+        
+    }
+
+    function _sdl_path_references_submodule($path) {
+	    $path_components = explode('.json', $path);
+
+        if ($path_components[1] === "") {
+            return false;
+        } else if (strlen($path_components[1]) === 32) {
+            return true;
+        } else {
+            return 'eek'; // TODO: handle this more nicely :)
+        }
+    }
+
+    function _sdl_get_submodule_parent_module_path($submodule_path) {
 
     }
 
