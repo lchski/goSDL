@@ -63,7 +63,7 @@
 		$user = $input["user"]["value"];
 		$risk_rating = $input["risk_rating"]["value"];
 		$jiraEpicId = $input["jiraepic"]["value"];
-		$list_of_modules = $input["list_of_modules"];
+		$list_of_modules = _sdl_add_missing_parent_modules($input["list_of_modules"]);
 
 
 		#Check Trello or Jira
